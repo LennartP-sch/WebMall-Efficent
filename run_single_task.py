@@ -88,6 +88,11 @@ AGENT_CLAUDE_AX = GenericAgentArgs(
     flags=FLAGS_AX,
 )
 
+AGENT_QWEN3_MAX_AX = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/qwen/qwen3-max"],
+    flags=FLAGS_AX,
+)
+
 AGENT_41_V = GenericAgentArgs(
     chat_model_args=CHAT_MODEL_ARGS_DICT["openai/gpt-4.1-2025-04-14"],
     flags=FLAGS_V,
@@ -95,6 +100,11 @@ AGENT_41_V = GenericAgentArgs(
 
 AGENT_CLAUDE_V = GenericAgentArgs(
     chat_model_args=CHAT_MODEL_ARGS_DICT["anthropic/claude-sonnet-4-20250514"],
+    flags=FLAGS_V,
+)
+
+AGENT_QWEN3_MAX_V = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/qwen/qwen3-max"],
     flags=FLAGS_V,
 )
 
@@ -108,6 +118,11 @@ AGENT_CLAUDE_AX_V = GenericAgentArgs(
     flags=FLAGS_AX_V,
 )
 
+AGENT_QWEN3_MAX_AX_V = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/qwen/qwen3-max"],
+    flags=FLAGS_AX_V,
+)
+
 AGENT_41_AX_M = GenericAgentArgs(
     chat_model_args=CHAT_MODEL_ARGS_DICT["openai/gpt-4.1-2025-04-14"],
     flags=FLAGS_AX_M,
@@ -115,6 +130,11 @@ AGENT_41_AX_M = GenericAgentArgs(
 
 AGENT_CLAUDE_AX_M = GenericAgentArgs(
     chat_model_args=CHAT_MODEL_ARGS_DICT["anthropic/claude-sonnet-4-20250514"],
+    flags=FLAGS_AX_M,
+)
+
+AGENT_QWEN3_MAX_AX_M = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/qwen/qwen3-max"],
     flags=FLAGS_AX_M,
 )
 
@@ -134,6 +154,7 @@ agent.set_benchmark(bgym.DEFAULT_BENCHMARKS["webarena"](), demo_mode="off")
 
 chat_model_args = CHAT_MODEL_ARGS_DICT["openai/gpt-4.1-2025-04-14"]
 #chat_model_args = CHAT_MODEL_ARGS_DICT["anthropic/claude-sonnet-4-20250514"]
+#chat_model_args = CHAT_MODEL_ARGS_DICT["openrouter/qwen/qwen3-max"]  # Use Qwen3-Max via OpenRouter
 
 exp_args = [
     ExpArgsWebMall(
