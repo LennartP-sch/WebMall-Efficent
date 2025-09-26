@@ -65,6 +65,8 @@ FLAGS_default = GenericPromptFlags(
 
 FLAGS_AX = FLAGS_default.copy()
 
+FLAGS_LLAMA3_70B = FLAGS_default.copy()
+
 FLAGS_V = FLAGS_default.copy()
 FLAGS_V.obs.use_screenshot = True
 FLAGS_V.obs.use_som = True
@@ -118,9 +120,23 @@ AGENT_CLAUDE_AX_M = GenericAgentArgs(
     flags=FLAGS_AX_M,
 )
 
+AGENT_LLAMA3_70B = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/meta-llama/llama-3-70b-instruct"],
+    flags=FLAGS_LLAMA3_70B,
+)
+
+AGENT_GROK_4_FAST_AX_M = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/x-ai/grok-4-fast:free"],
+    flags=FLAGS_AX_M,
+)
+AGENT_DEEPSEEK_R1_AX = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/deepseek-chat-v3.1:free"],
+    flags=FLAGS_AX,
+)
+
 # example for a single task
 env_args = EnvArgsWebMall(
-    task_name="webmall.Webmall_Best_Fit_Specific_Task6",
+    task_name="webmall.Webmall_Find_Specific_Product_Task6",
     task_seed=0,
     max_steps=30,
     headless=True,
@@ -129,11 +145,16 @@ env_args = EnvArgsWebMall(
 
 
 
-agent = AGENT_41_AX
+#agent = AGENT_41_AX
+#agent = AGENT_LLAMA3_70B
+agent = AGENT_GROK_4_FAST_AX_M
+#agent = AGENT_DEEPSEEK_R1_AX
 agent.set_benchmark(bgym.DEFAULT_BENCHMARKS["webarena"](), demo_mode="off")
 
-chat_model_args = CHAT_MODEL_ARGS_DICT["openai/gpt-4.1-2025-04-14"]
+#chat_model_args = CHAT_MODEL_ARGS_DICT["openrouter/meta-llama/llama-3-70b-instruct"]
+#chat_model_args = CHAT_MODEL_ARGS_DICT["openai/gpt-4.1-2025-04-14"]
 #chat_model_args = CHAT_MODEL_ARGS_DICT["anthropic/claude-sonnet-4-20250514"]
+#chat_model_args = CHAT_MODEL_ARGS_DICT["openrouter/x-ai/grok-4-fast:free"]
 
 exp_args = [
     ExpArgsWebMall(

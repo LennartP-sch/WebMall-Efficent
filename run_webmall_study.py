@@ -121,6 +121,10 @@ AGENT_CLAUDE_AX_M = GenericAgentArgs(
     chat_model_args=CHAT_MODEL_ARGS_DICT["anthropic/claude-sonnet-4-20250514"],
     flags=FLAGS_AX_M,
 )
+AGENT_GROK_4_FAST_AX_M = GenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/x-ai/grok-4-fast:free"],
+    flags=FLAGS_AX_M,
+)
 
 current_file = Path(__file__).resolve()
 PATH_TO_DOT_ENV_FILE = current_file.parent / ".env"
@@ -128,12 +132,13 @@ load_dotenv(PATH_TO_DOT_ENV_FILE)
 
 
 # choose your agent or provide a new agent
-agent_args = [AGENT_41_AX]
+agent_args = [AGENT_GROK_4_FAST_AX_M]
 
 # ## select the benchmark to run on
 
-benchmark = "webmall_basic_v0.7"
-# benchmark = "webmall_advanced_v0.7"
+#benchmark = "webmall_v0.7"
+#benchmark = "webmall_basic_v0.7"
+benchmark = "webmall_advanced_v0.7"
 
 # Set reproducibility_mode = True for reproducibility
 # this will "ask" agents to be deterministic. Also, it will prevent you from launching if you have
@@ -145,7 +150,7 @@ reproducibility_mode = False
 relaunch = False
 
 ## Number of parallel jobs
-n_jobs = 1  # Make sure to use 1 job when debugging in VSCode
+n_jobs = 2  # Make sure to use 1 job when debugging in VSCode
 # n_jobs = -1  # to use all available cores
 
 

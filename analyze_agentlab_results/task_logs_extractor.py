@@ -7,6 +7,30 @@ from collections import defaultdict, OrderedDict
 from glob import glob
 from urllib.parse import urlparse
 
+# Beim erstellen der Ergebnisse gab es einen Uni Code error desweghabe ich das angewendet
+# Diese 5 Stellen müssen geändert werden:
+
+    # Zeile 242:
+    #with open(penalties_csv_path, "w", encoding="utf-8") as f:
+    
+    # Zeile 265:
+    #with open(checklist_csv_path, "w", encoding="utf-8") as f:
+    
+    # Zeile 180 (summary_info.json lesen):
+    #with open(summary_info_path, "r", encoding="utf-8") as f:
+    
+    # Zeile 280:
+    #with open(eco_output_path, "w", encoding="utf-8") as f:
+    
+    # Zeile 284:
+    #with open(task_output_path, "w", encoding="utf-8") as f:
+    
+    # Zeile 292 (DER HAUPTFEHLER):
+   #with open(csv_output_path, "w", encoding="utf-8") as f:
+
+
+
+
 SHOP_PORT_DICT = {
     8085: "start page",
     8081: "shop1",
@@ -194,7 +218,7 @@ def summarize_single_task(directory="."):
     summary_info_path = os.path.join(directory, "summary_info.json")
     if os.path.exists(summary_info_path) and step_nums_in_order:
         try:
-            with open(summary_info_path, "r") as f:
+            with open(summary_info_path, "r", encoding="utf-8") as f:
                 summary_info = json.load(f)
 
             err_msg = summary_info.get("err_msg")
@@ -233,7 +257,7 @@ def summarize_single_task(directory="."):
 
         # Write penalties and wrong solutions to separate CSV
         penalties_csv_path = os.path.join(directory, "penalties.csv")
-        with open(penalties_csv_path, "w") as f:
+        with open(penalties_csv_path, "w", encoding="utf-8") as f:
             f.write("experiment_id,task_id,penalty,wrong_solutions\n")
             f.write(f"{experiment_id},{task_id},{penalty},{wrong_solutions_str}\n")
 
@@ -252,7 +276,7 @@ def summarize_single_task(directory="."):
         # Save checklist data to CSV
         if checklist_data:
             checklist_csv_path = os.path.join(directory, "goal_achievement.csv")
-            with open(checklist_csv_path, "w") as f:
+            with open(checklist_csv_path, "w", encoding="utf-8") as f:
                 f.write("experiment_id,task_id,goal_description,achieved,weight\n")
                 for row in checklist_data:
                     f.write(",".join(map(str, row)) + "\n")
@@ -269,17 +293,17 @@ def summarize_single_task(directory="."):
     eco_output["steps"] = sorted_steps_data
 
     eco_output_path = os.path.join(directory, "eco_metrics_summary.json")
-    with open(eco_output_path, "w") as f:
+    with open(eco_output_path, "w", encoding="utf-8") as f:
         json.dump(eco_output, f, indent=2)
 
     # Save task summary with step-wise cumulative rewards
     task_output_path = os.path.join(directory, "task_summary.json")
-    with open(task_output_path, "w") as f:
+    with open(task_output_path, "w", encoding="utf-8") as f:
         json.dump(sorted_task_summary, f, indent=2)
 
     # Save CSV data
     csv_output_path = os.path.join(directory, "task_stepwise_log.csv")
-    with open(csv_output_path, "w") as f:
+    with open(csv_output_path, "w", encoding="utf-8") as f:
         f.write(
             "step\tshop_id\taction\tused_axtree_object\turl\treward\tcumulative_reward\tthought\texperiment_id\ttask_id\n"
         )
