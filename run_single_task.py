@@ -23,6 +23,8 @@ from agentlab.llm.llm_configs import CHAT_MODEL_ARGS_DICT
 
 from agentlab.agents.generic_agent.generic_agent import GenericAgent, GenericPromptFlags, GenericAgentArgs
 
+from webmall_overrides.filtered_generic_agent import FilteredGenericAgentArgs
+
 FLAGS_default = GenericPromptFlags(
     obs=dp.ObsFlags(
         use_html=False,
@@ -134,9 +136,15 @@ AGENT_DEEPSEEK_R1_AX = GenericAgentArgs(
     flags=FLAGS_AX,
 )
 
+AGENT_GROK_4_FAST_AX_M_FILTERED = FilteredGenericAgentArgs(
+    chat_model_args=CHAT_MODEL_ARGS_DICT["openrouter/x-ai/grok-4-fast:free"],
+    flags=FLAGS_AX_M,
+    enable_axtree_filter=True,
+)
+
 # example for a single task
 env_args = EnvArgsWebMall(
-    task_name="webmall.Webmall_Find_Specific_Product_Task6",
+    task_name="webmall.Webmall_Find_Specific_Product_Task1",
     task_seed=0,
     max_steps=30,
     headless=True,
@@ -147,7 +155,7 @@ env_args = EnvArgsWebMall(
 
 #agent = AGENT_41_AX
 #agent = AGENT_LLAMA3_70B
-agent = AGENT_GROK_4_FAST_AX_M
+agent = AGENT_GROK_4_FAST_AX_M_FILTERED
 #agent = AGENT_DEEPSEEK_R1_AX
 agent.set_benchmark(bgym.DEFAULT_BENCHMARKS["webarena"](), demo_mode="off")
 
